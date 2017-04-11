@@ -19,6 +19,7 @@ Icon.propTypes = {
   hidden: PropTypes.bool.isRequired,
 }
 Icon.defaultProps = {
+  className: null,
   hidden: false,
 }
 export default Icon

@@ -1,2 +1,6 @@
 export { default as Button } from './Button'
 export { default as CloseButton } from './CloseButton'
+export { default as Icon } from './Icon'
+export { default as Link } from './Link'
+export { default as LinkContent } from './LinkContent'
+export { default as LinkOrNot } from './LinkOrNot'
