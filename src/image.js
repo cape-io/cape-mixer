@@ -8,9 +8,9 @@ import { entityTypeSelector } from 'redux-graph'
 import { selectUser } from 'cape-redux-auth'
 import { saveEntity, saveTriple, updateEntity } from 'cape-firebase'
 
-import { CDN_URL } from '../config'
-import { omitFile } from '../components/FileUpload/dropZoneUtils'
-import { loadImage, loadImageUrl, loadSha } from '../components/FileUpload/processFile'
+import { IMAGE } from './module'
+import { omitFile } from './FileUpload/dropZoneUtils'
+import { loadImage, loadImageUrl, loadSha } from './FileUpload/windowFileUtils'
 import { getIdFromFile, selectItems } from './items'
 import firebase from '../firebase'
 
@@ -18,23 +18,7 @@ const { storage } = firebase
 
 export const ACCEPT_FILE_TYPE = 'image/jpeg'
 export const collectionId = 'file'
-export const debugReturn = (item) => { console.log(item); return item }
-export const onProgress = (dispatch, prefix) => flow(
-  pick(['bytesTransferred', 'totalBytes']), partial(saveProgress, prefix), dispatch
-)
 
-export function getImgSrc(url) {
-  return `${url}?crop=entropy&fit=crop&h=100&w=100`
-}
-export function clearFileSelect(prefix) { return callWith(clear(prefix)) }
-
-export const onComplete = (dispatch, { id, fileName, type }, prefix) => () => {
-  const url = CDN_URL + fileName
-  dispatch(saved(prefix, { id, value: url }))
-  loadImage(getImgSrc(url), () => clearFileSelect(prefix)(dispatch))
-  dispatch(updateEntity({ id, type, url }))
-  // console.log('done', getFileUrl(fileName))
-}
 
 export const uploadImage = (dispatch, entity, file, props) => {
   // console.log(entity, file)
@@ -67,7 +51,7 @@ export function blurSelectorOmitFile({ onBlur }, file) {
   return onBlur(omitFile(file))
 }
 
-export const selectImages = entityTypeSelector('ImageObject')
+export const selectImages = entityTypeSelector(IMAGE)
 export const findImage = getSelect(
   selectImages,
   fieldValue(collectionId, 'value.contentSha1'),
@@ -76,7 +60,7 @@ export const findImage = getSelect(
 export const createImageEntity = state => flow(
   omitFile,
   setField('id', get('contentSha1')),
-  setKeyVal('type', 'ImageObject'),
+  setKeyVal('type', IMAGE),
   setKeyVal('agent', selectUser(state))
 )
 // Get or create entity.
