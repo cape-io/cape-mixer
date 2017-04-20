@@ -10,7 +10,6 @@ function CloseButton(props) {
       {...props}
     />)
 }
-
 CloseButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
