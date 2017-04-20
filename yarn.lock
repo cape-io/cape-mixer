@@ -1332,13 +1332,14 @@ cape-select@^2.3.1, cape-select@^2.4.0:
     cape-lodash "^1.7.0"
     lodash "^4.17.2"
 
-cape-style@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/cape-style/-/cape-style-1.0.0.tgz#bb8cfab5bb1bcf2454968b54bfb7ca2c03d40cf6"
+cape-style@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/cape-style/-/cape-style-1.0.2.tgz#8fd3468bfdb65a5dcf613d77117a2ed2203c95f4"
   dependencies:
     cape-lodash "^1.11.0"
     lodash "^4.17.4"
     reselect "^3.0.0"
+    tinycolor2 "^1.4.1"
 
 cardinal@^1.0.0:
   version "1.0.0"
@@ -4608,13 +4609,7 @@ promise@7.1.1, promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@~15.5.7:
-  version "15.5.7"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.7.tgz#231c4f29cdd82e355011d4889386ca9059544dd1"
-  dependencies:
-    fbjs "^0.8.9"
-
-prop-types@^15.5.8:
+prop-types@^15.0.0, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
   version "15.5.8"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
   dependencies:
@@ -4714,18 +4709,7 @@ react-dom@^15.5.4:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
-react-redux@^4.4.6:
-  version "4.4.8"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-4.4.8.tgz#e7bc1dd100e8b64e96ac8212db113239b9e2e08f"
-  dependencies:
-    create-react-class "^15.5.1"
-    hoist-non-react-statics "^1.0.3"
-    invariant "^2.0.0"
-    lodash "^4.2.0"
-    loose-envify "^1.1.0"
-    prop-types "^15.5.4"
-
-react-redux@^5.0.1:
+react-redux@^5.0.1, react-redux@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.4.tgz#1563babadcfb2672f57f9ceaa439fb16bf85d55b"
   dependencies:
@@ -4782,7 +4766,11 @@ react-scripts@0.9.5:
   optionalDependencies:
     fsevents "1.0.17"
 
-react@^15.4.1, react@^15.5.4:
+react-textarea-autosize@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-4.0.5.tgz#55379f6a6fa575fc87d1b8de2756e57e3b6c995d"
+
+react@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
   dependencies:
@@ -4900,16 +4888,16 @@ redux-graph@^2.10.0, redux-graph@^2.11.0, redux-graph@^2.12.1, redux-graph@^2.7.
     redux "^3.6.0"
     reselect "^3.0.0"
 
-redux-history-component@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/redux-history-component/-/redux-history-component-1.0.2.tgz#a2bbb28d0b58cd555deb914249b788156824d5be"
+redux-history-component@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/redux-history-component/-/redux-history-component-2.1.0.tgz#0f6e64033c90bd459e16c4d6231d2aea16adf3a2"
   dependencies:
-    cape-redux "^2.2.1"
     classnames "^2.2.5"
-    lodash "^4.17.2"
-    react "^15.4.1"
-    react-redux "^4.4.6"
-    redux "^3.2.1"
+    lodash "^4.17.4"
+    prop-types "^15.5.8"
+    react "^15.5.4"
+    react-redux "^5.0.4"
+    redux "^3.6.0"
     redux-history-sync "^3.1.0"
 
 redux-history-sync@^3.1.0:
@@ -4934,7 +4922,7 @@ redux-windowsize@^1.3.1:
     lodash "^4.17.2"
     reselect "^2.5.4"
 
-redux@^3.2.1, redux@^3.6.0:
+redux@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
   dependencies:
@@ -5542,6 +5530,10 @@ timers-browserify@^2.0.2:
   resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.2.tgz#ab4883cf597dcd50af211349a00fbca56ac86b86"
   dependencies:
     setimmediate "^1.0.4"
+
+tinycolor2@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
 
 tmpl@1.0.x:
   version "1.0.4"

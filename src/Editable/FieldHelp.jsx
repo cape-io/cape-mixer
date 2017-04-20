@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { partial } from 'lodash'
 import classNames from 'classnames'
-import './FieldHelp.css'
+// import './FieldHelp.css'
 
 // A simple span that displays help text.
 // Optional class added when help is related to an error.

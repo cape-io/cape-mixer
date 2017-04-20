@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react'
-
+import React from 'react'
+import PropTypes from 'prop-types'
 // The value for simple static (not editable) text fields.
 
 function PreviewTextStatic({ value }) {
