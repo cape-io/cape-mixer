@@ -1,29 +1,36 @@
-import { flow, partial } from 'lodash'
-import { add, get, map, orderBy, pick, size, split } from 'lodash/fp'
-import { callWith, replaceField, setField, setKeyVal } from 'cape-lodash'
-import { createSelector } from 'reselect'
-import { getSelect, structuredSelector } from 'cape-select'
-import { clear, fieldValue, meta, saved, saveProgress } from 'redux-field'
+import { flow } from 'lodash'
+import { add, get, pick, size, split } from 'lodash/fp'
+import { setField, setKeyVal } from 'cape-lodash'
+import { getSelect } from 'cape-select'
+import { clear, fieldValue, meta } from 'redux-field'
 import { entityTypeSelector } from 'redux-graph'
 import { selectUser } from 'cape-redux-auth'
-import { saveEntity, saveTriple, updateEntity } from 'cape-firebase'
+import { saveEntity, saveTriple, uploadFile, updateEntityFields } from 'cape-firebase'
 
 import { IMAGE } from './module'
 import { omitFile } from './FileUpload/dropZoneUtils'
-import { loadImage, loadImageUrl, loadSha } from './FileUpload/windowFileUtils'
-import { getIdFromFile, selectItems } from './items'
-import firebase from '../firebase'
-
-const { storage } = firebase
+import { loadImage, loadImageDataUrl, loadSha } from './FileUpload/windowFileUtils'
+import { getImgSrc, getImgPreviewSrc } from './select'
 
 export const ACCEPT_FILE_TYPE = 'image/jpeg'
 export const collectionId = 'file'
 
+export const onFileComplete = (dispatch, entity, prefix) => (store) => {
+  const state = store.getState()
+  const url = getImgSrc(entity.fileName)(state)
+  // Save the URL to the entity.
+  dispatch(updateEntityFields(entity, { url }))
+
+  // dispatch(saved(prefix, { id, value: url }))
+  loadImage(getImgPreviewSrc(url)(state))
+  .then(() => dispatch(clear(prefix)))
+  // console.log('done', getFileUrl(fileName))
+}
 
 export const uploadImage = (dispatch, entity, file, props) => {
   // console.log(entity, file)
-  const { fileName } = entity
-  loadImageUrl(file, console.error, (imageInfo) => {
+  // const { fileName } = entity
+  loadImageDataUrl(file, console.error, (imageInfo) => {
     if (!imageInfo) return undefined
     const { dataUrl, ...sizes } = imageInfo
     const entityUpdateFields = { ...pick(['id', 'type'], entity), ...sizes }
@@ -31,14 +38,12 @@ export const uploadImage = (dispatch, entity, file, props) => {
     if (dataUrl) dispatch(meta(props.prefix, imageInfo))
     return undefined
   })
-
+  dispatch(uploadFile({ file, entity }))
+  .then(onFileComplete(dispatch, entity, props.prefix))
   // @TODO Make sure there isn't already this file in the database.
-  const uploadTask = storage.child(fileName).put(file)
-  uploadTask.on('state_changed',
-    onProgress(dispatch, props.prefix), console.error, onComplete(dispatch, entity, props.prefix)
-  )
-  // Need to update the image form field.
-  return uploadTask
+
+  // Need to update the image form field?
+  // return uploadTask
 }
 
 
@@ -119,39 +124,4 @@ export const handleSelect = errorOrBlur((props, file) => {
   loadSha(file)
   .then(fileWithSha => dispatch(ensureFileEntity(props, fileWithSha)))
   .then(entity => !entity.hasEntity && uploadImage(dispatch, entity, file.file, props))
-})
-
-// A file has been selected. Upload a file. First func is props. Use that instead of thunk.
-// export const handleUpload = props => (file) => {
-//   console.log(file)
-  // const hasError = errorCheck(props, file)
-  // blurSelectorOmitFile(props, file)
-  // clearFileSelect(dispatch)
-  // loadSha(file, ensureFileEntity(props, getState))
-  // if (file) loadSha(file, uploadImage(dispatch, agent))
-  // console.log(file)
-//   return undefined
-// }
-export const findItemFromFile = getSelect(
-  selectItems,
-  flow(fieldValue(collectionId), getIdFromFile),
-)
-
-export const getImg = flow(
-  pick(['dateCreated', 'name', 'url']),
-  replaceField('url', getImgSrc)
-)
-// Specific to item file upload page.
-export const getImages = createSelector(
-  selectImages,
-  flow(
-    map(getImg),
-    orderBy('dateCreated', 'desc'),
-  )
-)
-export const imageSelector = structuredSelector({
-  accept: ACCEPT_FILE_TYPE,
-  collectionId,
-  images: getImages,
-  item: findItemFromFile,
 })

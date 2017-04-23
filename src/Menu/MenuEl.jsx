@@ -17,7 +17,7 @@ function Menu({ activeId, links, actions }) {
 }
 Menu.propTypes = {
   activeId: PropTypes.string.isRequired,
-  links: PropTypes.array.isRequired,
+  links: PropTypes.arrayOf(PropTypes.object).isRequired,
   actions: PropTypes.objectOf(PropTypes.func).isRequired,
 }
 Menu.defaultProps = {

@@ -219,6 +219,10 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
+attr-accept@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-1.1.0.tgz#b5cd35227f163935a8f1de10ed3eba16941f6be6"
+
 autoprefixer@6.7.2, autoprefixer@^6.3.1:
   version "6.7.2"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-6.7.2.tgz#172ab07b998ae9b957530928a59a40be54a45023"
@@ -1249,9 +1253,22 @@ cape-firebase@^0.3.0:
     redux-field "^4.4.1"
     redux-graph "^2.10.0"
 
-cape-firebase@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-0.6.0.tgz#1efe1cfe297edfedac0ef28fffaa391c28e0cff3"
+cape-firebase@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-1.0.5.tgz#83656f6f75d8f73e3a4159f50b19b546f32b6d7a"
+  dependencies:
+    cape-lodash "^1.11.0"
+    cape-redux "^3.1.0"
+    cape-redux-auth "^4.0.0"
+    cape-select "^2.4.0"
+    firebase "^3.6.9"
+    lodash "^4.17.4"
+    redux-field "^4.4.1"
+    redux-graph "^2.11.0"
+
+cape-firebase@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-1.0.7.tgz#65b7c294e0fa762b7476b6923b8ad564ada3a957"
   dependencies:
     cape-lodash "^1.11.0"
     cape-redux "^3.1.0"
@@ -1263,7 +1280,13 @@ cape-firebase@^0.6.0:
     redux-field "^4.4.1"
     redux-graph "^2.11.0"
 
-cape-lodash@^1.10.0, cape-lodash@^1.11.0, cape-lodash@^1.7.0, cape-lodash@^1.8.0:
+cape-lodash@^1.10.0, cape-lodash@^1.12.0, cape-lodash@^1.7.0:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/cape-lodash/-/cape-lodash-1.12.0.tgz#75da92fd3a3920db8966cff0103e03b65b82821b"
+  dependencies:
+    lodash "^4.17.2"
+
+cape-lodash@^1.11.0, cape-lodash@^1.8.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/cape-lodash/-/cape-lodash-1.11.0.tgz#ba6d6d20e20bc771dcfcf32775d395fda4fb5007"
   dependencies:
@@ -1293,15 +1316,19 @@ cape-redux-collection@^4.0.1:
     redux-history-sync "^3.1.0"
     reselect "^3.0.0"
 
-cape-redux-reducer@^3.6.0, cape-redux-reducer@^3.7.1:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/cape-redux-reducer/-/cape-redux-reducer-3.7.1.tgz#3d445d4f26fa80617ab45d24950b0561b8ca96fb"
+cape-redux-reducer@^3.10.3, cape-redux-reducer@^3.6.0:
+  version "3.10.3"
+  resolved "https://registry.yarnpkg.com/cape-redux-reducer/-/cape-redux-reducer-3.10.3.tgz#f252aee07a0d0444106d9314bcc8dcab6daa3a4a"
   dependencies:
-    cape-lodash "^1.11.0"
+    cape-firebase "^1.0.5"
+    cape-lodash "^1.12.0"
     cape-redux "^3.1.0"
     cape-redux-auth "^4.0.0"
     cape-redux-collection "^4.0.1"
+    cape-select "^2.4.0"
+    location-info "^4.0.3"
     lodash "^4.17.4"
+    redux "^3.6.0"
     redux-field "^4.5.0"
     redux-graph "^2.12.1"
     redux-history-sync "^3.1.0"
@@ -1332,9 +1359,9 @@ cape-select@^2.3.1, cape-select@^2.4.0:
     cape-lodash "^1.7.0"
     lodash "^4.17.2"
 
-cape-style@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/cape-style/-/cape-style-1.0.2.tgz#8fd3468bfdb65a5dcf613d77117a2ed2203c95f4"
+cape-style@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/cape-style/-/cape-style-1.0.3.tgz#91cc1d838d0f838fece8b1beb192d7444f1a367d"
   dependencies:
     cape-lodash "^1.11.0"
     lodash "^4.17.4"
@@ -3655,6 +3682,17 @@ loader-utils@0.2.x, loader-utils@^0.2.11, loader-utils@^0.2.16, loader-utils@^0.
     json5 "^0.5.0"
     object-assign "^4.0.1"
 
+location-info@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/location-info/-/location-info-4.0.3.tgz#4bf62df08c4f80f1c5c3e5e588966e047fbe4686"
+  dependencies:
+    cape-lodash "^1.12.0"
+    cape-redux "^3.1.0"
+    cape-select "^2.4.0"
+    lodash "^4.17.4"
+    reselect "^3.0.0"
+    url-pattern "^1.0.2"
+
 lodash-es@^4.2.0, lodash-es@^4.2.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
@@ -5678,6 +5716,10 @@ url-parse@^1.0.1, url-parse@^1.1.1:
   dependencies:
     querystringify "0.0.x"
     requires-port "1.0.x"
+
+url-pattern@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/url-pattern/-/url-pattern-1.0.3.tgz#0409292471b24f23c50d65a47931793d2b5acfc1"
 
 url@^0.11.0:
   version "0.11.0"

@@ -7,7 +7,7 @@ export function imgPreviewSettings() {
 }
 // Create default image url.
 export function getImgSrc(fileName) {
-  return state => `${selectDbPath(state)}${fileName}`
+  return state => `${selectCdn(state)}${fileName}`
 }
 
 export function getImgPreviewSrc(url) {
