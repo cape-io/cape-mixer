@@ -2,10 +2,13 @@ import React, { PropTypes } from 'react'
 import { map } from 'lodash'
 import css from 'cape-style'
 import { handleSelect } from '../image'
+import { getEntityPrefix } from '../capeField'
 import Field from './Field'
 import FileSelect from '../FileUpload/FileSelectContainer'
 
-function Fields({ entity, fields, prefix, title }) {
+function Fields(props) {
+  const { entity, fields, title } = props
+  const prefix = getEntityPrefix(props)
   // console.log(entity)
   return (
     <div>
