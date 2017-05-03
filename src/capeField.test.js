@@ -6,6 +6,7 @@ describe('getEntityPrefix', () => {
   it('returns prefix array', () => {
     expect(getEntityPrefix({ collectionId: 'foo' })).toEqual(['foo'])
     expect(getEntityPrefix({ collectionId: 'foo', fieldId: 'bar' })).toEqual(['foo', 'bar'])
+    expect(getEntityPrefix({ entity: { type: 'Foo', id: 'bar1' } })).toEqual(['Foo', 'bar1'])
   })
 })
 const state = { form: { foo: { focus: true, value: 'silly' } } }

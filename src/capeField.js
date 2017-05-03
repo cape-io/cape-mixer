@@ -14,9 +14,10 @@ export function mapDispatchToProps(getActions) {
   return (dispatch, props) => ({ dispatch, ...bindActionCreators(getActions(props), dispatch) })
 }
 export const prefixProps = ['collectionId', 'fieldId']
+export const withEntity = partial(flow, property('entity'))
 export const getEntityPrefix = cond([
   [property('prefix'), property('prefix')],
-  [isEntityCreated, at(['type', 'id'])],
+  [withEntity(isEntityCreated), withEntity(at(['type', 'id']))],
   [stubTrue, flow(at(prefixProps), filter)],
 ])
 export const getFieldState = overArgs(get, [selectForm, getEntityPrefix])
