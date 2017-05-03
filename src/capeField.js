@@ -4,7 +4,7 @@ import {
   omit, overArgs, partial, property, stubTrue,
 } from 'lodash'
 import { at, getOr } from 'lodash/fp'
-// import { mapDispatchToProps } from 'cape-redux'
+import { isEntityCreated } from 'redux-graph'
 import { mapPartial, selectForm } from 'redux-field'
 import { bindActionCreators } from 'redux'
 
@@ -16,6 +16,7 @@ export function mapDispatchToProps(getActions) {
 export const prefixProps = ['collectionId', 'fieldId']
 export const getEntityPrefix = cond([
   [property('prefix'), property('prefix')],
+  [isEntityCreated, at(['type', 'id'])],
   [stubTrue, flow(at(prefixProps), filter)],
 ])
 export const getFieldState = overArgs(get, [selectForm, getEntityPrefix])

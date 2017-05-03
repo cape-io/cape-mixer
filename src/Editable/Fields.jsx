@@ -11,7 +11,7 @@ function Fields(props) {
   const prefix = getEntityPrefix(props)
   // console.log(entity)
   return (
-    <div>
+    <div className="fields">
       {title && <h2>{title}</h2>}
       <ul style={css('lsNone m0 p0')}>
         {map(fields, ({ id, ...field }) => (
@@ -43,7 +43,7 @@ Fields.propTypes = {
     id: PropTypes.string.isRequired,
   }).isRequired,
   fields: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-  prefix: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // prefix: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
 }
 Fields.defaultProps = {
