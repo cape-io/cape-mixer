@@ -14,7 +14,9 @@ import { getImgSrc, getImgPreviewSrc } from './select'
 
 export const ACCEPT_FILE_TYPE = 'image/jpeg'
 export const collectionId = 'file'
-
+export function isUploaded(entity) {
+  return entity.bytesTransferred === entity.contentSize
+}
 export const onFileComplete = (dispatch, entity, prefix) => (store) => {
   const state = store.getState()
   const url = getImgSrc(entity.fileName)(state)
@@ -28,7 +30,6 @@ export const onFileComplete = (dispatch, entity, prefix) => (store) => {
 }
 
 export const uploadImage = (dispatch, entity, file, props) => {
-  // console.log(entity, file)
   // const { fileName } = entity
   loadImageDataUrl(file, console.error, (imageInfo) => {
     if (!imageInfo) return undefined
@@ -45,7 +46,6 @@ export const uploadImage = (dispatch, entity, file, props) => {
   // Need to update the image form field?
   // return uploadTask
 }
-
 
 // Select previous file selector error.
 export const getError = fieldValue(collectionId, 'error')
@@ -71,7 +71,6 @@ export const createImageEntity = state => flow(
 // Get or create entity.
 export const getOrCreateEntity = (file, state) => {
   const entity = get(file.contentSha1, selectImages(state))
-  if (entity) console.log('found entity')
   return entity || createImageEntity(state)(file)
 }
 
@@ -85,7 +84,7 @@ export const ensureFileEntity = (props, file) => (dispatch, getState) => {
     dispatch(saveTriple({ subject, predicate: fieldId, object: entity, single }))
   }
   // bytesTransferred
-  if (entity.bytesTransferred === entity.contentSize) {
+  if (isUploaded(entity)) {
     return Promise.resolve(dispatch(blurSelectorOmitFile(props, entity)))
   }
   // Save to firebase
@@ -120,8 +119,13 @@ export const errorOrBlur = next => props => (file) => {
 }
 // FILE UPLOAD
 export const handleSelect = errorOrBlur((props, file) => {
-  const { dispatch } = props
+  const { dispatch, prefix } = props
   loadSha(file)
   .then(fileWithSha => dispatch(ensureFileEntity(props, fileWithSha)))
-  .then(entity => !entity.hasEntity && uploadImage(dispatch, entity, file.file, props))
+  .then((entity) => {
+    if (!isUploaded(entity)) {
+      return uploadImage(dispatch, entity, file.file, props)
+    }
+    return dispatch(clear(prefix))
+  })
 })
