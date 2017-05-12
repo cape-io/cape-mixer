@@ -32,6 +32,7 @@ function Fields(props) {
             />}
           </li>
         ))}
+        <li className="id-field">{entity.id}</li>
       </ul>
     </div>
   )

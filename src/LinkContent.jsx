@@ -15,7 +15,10 @@ function getIcon(icon) {
 
 // You can send it an icon or a name or both.
 function LinkContent({ children, defaultName, icon, name }) {
-  const text = isString(children) ? children : name
+  // If there is children and it's not a string render it.
+  if (children && !isString(children)) return children
+  // Assume children is string or undefined.
+  const text = children || name
   if (text && !icon) return <span>{text}</span>
   if (!text && icon) return getIcon(icon)
   if (icon && text) {
