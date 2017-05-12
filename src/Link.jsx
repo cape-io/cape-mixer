@@ -5,14 +5,19 @@ import InternalLink from 'redux-history-component'
 import css from 'cape-style'
 import LinkContent from './LinkContent'
 
-export function getHref({ href, link, siteId, src }) {
-  const linkHref = href || src || link
-  if (siteId) return `${linkHref}?utm_source=${siteId}`
+export function getLink({ href, link, src }) {
+  return href || src || link
+}
+export function getHref(props) {
+  const linkHref = getLink(props)
+  if (props.siteId) return `${linkHref}?utm_source=${props.siteId}`
   return linkHref
 }
-
+export function isInternalLink({ internal, isInternal, ...rest }) {
+  return isInternal || internal || (getLink(rest)[0] === '/')
+}
 function Link(props) {
-  const { action, internal, ...rest } = props
+  const { action, ...rest } = props
   if (action) {
     return (
       <button onClick={action} style={css('ba br1 p1 inlineBlock fs1 textReset bgTrans')}>
@@ -20,7 +25,7 @@ function Link(props) {
       </button>
     )
   }
-  if (internal) return <InternalLink {...rest}><LinkContent {...rest} /></InternalLink>
+  if (isInternalLink(rest)) return <InternalLink {...rest}><LinkContent {...rest} /></InternalLink>
 
   return (
     <a href={getHref(props)} {...pick(rest, 'className', 'title')}>
