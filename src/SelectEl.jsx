@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { isEmpty, isNumber, isString, map } from 'lodash'
 import classnames from 'classnames'
-import isNumber from 'lodash/isNumber'
-import isString from 'lodash/isString'
-import map from 'lodash/map'
 
 function SelectOption({ value, name, active }) {
   return (
@@ -18,31 +16,36 @@ SelectOption.propTypes = {
   value: PropTypes.string.isRequired,
 }
 SelectOption.defaultProps = {
+  active: false,
   value: '',
 }
-
-function opts(arg) {
-  if (isString(arg)) return { value: arg, name: arg }
-  if (isNumber(arg)) return { value: arg.toString(), name: arg.toString() }
+function getOptValue(arg, value) {
+  if (isString(arg.value)) return arg.value
+  if (isString(value)) return value
+  if (isNumber(arg)) return arg.toString()
   return arg
+}
+function getOptName(arg) {
+  if (isString(arg.name)) return arg.name
+  if (isNumber(arg)) return arg.toString()
+  return arg
+}
+function opts(arg, id, value) {
+  const val = getOptValue(arg, id)
+  return {
+    active: value === val,
+    key: id,
+    value: val,
+    name: getOptName(arg),
+  }
 }
 
 function Select({ firstOptionName, options, value, required, ...props }) {
-  if (!options.length) return <div>NO OPTIONS</div>
+  if (isEmpty(options)) return <div>NO OPTIONS</div>
   return (
-    <select
-      {...props}
-      value={value}
-    >
+    <select {...props} value={value}>
       {!required && <SelectOption name={firstOptionName} />}
-      {map(options, (opt) => {
-        const optionDetails = opts(opt)
-        return (<SelectOption
-          {...optionDetails}
-          active={value === optionDetails.value}
-          key={optionDetails.value}
-        />)
-      })}
+      {map(options, (opt, id) => <SelectOption {...opts(opt, id, value)} />)}
     </select>
   )
 }
@@ -51,12 +54,17 @@ Select.propTypes = {
   firstOptionName: PropTypes.string,
   onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.array.isRequired,
+  options: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.objectOf(PropTypes.string),
+  ]).isRequired,
   required: PropTypes.bool,
   value: PropTypes.string,
 }
 Select.defaultProps = {
   firstOptionName: '- All -',
+  onBlur: undefined,
+  required: false,
   value: '',
 }
 export default Select

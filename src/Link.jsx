@@ -5,6 +5,11 @@ import InternalLink from 'redux-history-component'
 import css from 'cape-style'
 import LinkContent from './LinkContent'
 
+// Three kinds of links.
+// 1. Internal link. { routeId: string, ...params }
+// 1. External link. { href: string }
+// 1. Action button. { action: function }
+
 export function getLink({ href, link, src }) {
   return href || src || link
 }
