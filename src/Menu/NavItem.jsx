@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import css from 'cape-style'
-import LinkEl from './Link'
+import LinkEl from '../Link'
 
 const styles = {
   links: css('bb block fs1 textReset'),

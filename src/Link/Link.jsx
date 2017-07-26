@@ -3,33 +3,23 @@ import PropTypes from 'prop-types'
 import { pick } from 'lodash'
 import InternalLink from 'redux-history-component'
 import css from 'cape-style'
+import LinkAction from './LinkAction'
 import LinkContent from './LinkContent'
 
-// Three kinds of links.
-// 1. Internal link. { routeId: string, ...params }
-// 1. External link. { href: string }
+// Get the link type. Three kinds:
 // 1. Action button. { action: function }
+// 1. External link. { href: string }
+// 1. Internal link. { routeId: string, ...params }
+export function getLinkElement({ action, href, routeId }) {
+  if (action) return LinkAction
+  if (href) return LinkExternal
+  if (routeId) return InternalLink
+  return LinkContent
+}
 
-export function getLink({ href, link, src }) {
-  return href || src || link
-}
-export function getHref(props) {
-  const linkHref = getLink(props)
-  if (props.siteId) return `${linkHref}?utm_source=${props.siteId}`
-  return linkHref
-}
-export function isInternalLink({ internal, isInternal, ...rest }) {
-  return isInternal || internal || (getLink(rest)[0] === '/')
-}
 function Link(props) {
   const { action, ...rest } = props
-  if (action) {
-    return (
-      <button onClick={action} style={css('ba br1 p1 inlineBlock fs1 textReset bgTrans')}>
-        <LinkContent {...rest} />
-      </button>
-    )
-  }
+
   if (isInternalLink(rest)) return <InternalLink {...rest}><LinkContent {...rest} /></InternalLink>
 
   return (
