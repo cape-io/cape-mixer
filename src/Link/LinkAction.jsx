@@ -6,15 +6,15 @@ import LinkContent from './LinkContent'
 // Action button.
 // @TODO: Need a way to pass down some style to overwrite defaults.
 
-function LinkAction({ onClick, ...rest }) {
+function LinkAction({ action, ...rest }) {
   return (
-    <button onClick={onClick} style={css('ba br1 p1 inlineBlock fs1 textReset bgTrans')}>
+    <button onClick={action} style={css('ba br1 p1 inlineBlock fs1 textReset bgTrans')}>
       <LinkContent {...rest} />
     </button>
   )
 }
 
 LinkAction.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  action: PropTypes.func.isRequired,
 }
 export default LinkAction
