@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { pick } from 'lodash'
+import { get, pick } from 'lodash/fp'
 import InternalLink from 'redux-history-component'
 import css from 'cape-style'
 import LinkContent from './LinkContent'
@@ -18,9 +18,9 @@ export function getHref(props) {
   if (props.siteId) return `${linkHref}?utm_source=${props.siteId}`
   return linkHref
 }
-export function isInternalLink({ internal, isInternal, ...rest }) {
-  return isInternal || internal || (getLink(rest)[0] === '/')
-}
+export const isInternalLink = get('routeId')
+export const getProps = pick(['className', 'title'])
+
 function Link(props) {
   const { action, ...rest } = props
   if (action) {
@@ -33,7 +33,7 @@ function Link(props) {
   if (isInternalLink(rest)) return <InternalLink {...rest}><LinkContent {...rest} /></InternalLink>
 
   return (
-    <a href={getHref(props)} {...pick(rest, 'className', 'title')}>
+    <a href={getHref(props)} {...getProps(rest)}>
       <LinkContent {...props} />
     </a>
   )
