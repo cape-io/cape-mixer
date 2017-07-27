@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { pick } from 'lodash'
+// import { pick } from 'lodash'
 import InternalLink from 'redux-history-component'
-import css from 'cape-style'
+// import css from 'cape-style'
 import LinkAction from './LinkAction'
 import LinkContent from './LinkContent'
+import LinkExternal from './LinkExternal'
 
 // Get the link type. Three kinds:
 // 1. Action button. { action: function }
@@ -17,23 +18,20 @@ export function getLinkElement({ action, href, routeId }) {
   return LinkContent
 }
 
+// Link Router. Decide if it's internal, external, or an action button.
 function Link(props) {
-  const { action, ...rest } = props
-
-  if (isInternalLink(rest)) return <InternalLink {...rest}><LinkContent {...rest} /></InternalLink>
-
-  return (
-    <a href={getHref(props)} {...pick(rest, 'className', 'title')}>
-      <LinkContent {...props} />
-    </a>
-  )
+  const Component = getLinkElement(props)
+  return (<Component {...props} />)
 }
 Link.propTypes = {
   action: PropTypes.func,
-  className: PropTypes.string,
-  internal: PropTypes.bool,
   href: PropTypes.string,
-  name: PropTypes.string,
+  routeId: PropTypes.string,
   // siteId: PropTypes.string,
+}
+Link.defaultProps = {
+  action: null,
+  href: null,
+  routeId: null,
 }
 export default Link
