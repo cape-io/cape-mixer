@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 // import { pick } from 'lodash'
-import InternalLink from 'redux-history-component'
+import LinkInternal from 'redux-history-component'
 // import css from 'cape-style'
 import LinkAction from './LinkAction'
 import LinkContent from './LinkContent'
@@ -14,13 +14,14 @@ import LinkExternal from './LinkExternal'
 export function getLinkElement({ action, href, routeId }) {
   if (action) return LinkAction
   if (href) return LinkExternal
-  if (routeId) return InternalLink
+  if (routeId) return LinkInternal
   return LinkContent
 }
 
 // Link Router. Decide if it's internal, external, or an action button.
 function Link(props) {
   const Component = getLinkElement(props)
+  // Do we want to send LinkContent to LinkInternal?
   return (<Component {...props} />)
 }
 Link.propTypes = {
