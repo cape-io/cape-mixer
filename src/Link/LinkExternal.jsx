@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { pick } from 'lodash'
-import LinkContent from './LinkContent'
+import { Link } from 'redux-history-component'
 
 export function getHref({ href, siteId }) {
   if (siteId) return `${href}?utm_source=${siteId}`
@@ -9,11 +8,7 @@ export function getHref({ href, siteId }) {
 }
 
 function LinkExternal(props) {
-  return (
-    <a href={getHref(props)} {...pick(props, 'className', 'title', 'style', 'onClick')}>
-      <LinkContent {...props} />
-    </a>
-  )
+  return <Link {...props} href={getHref(props)} />
 }
 LinkExternal.propTypes = {
   siteId: PropTypes.string,

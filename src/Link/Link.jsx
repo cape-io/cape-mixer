@@ -15,14 +15,19 @@ export function getLinkElement({ action, href, routeId }) {
   if (action) return LinkAction
   if (href) return LinkExternal
   if (routeId) return LinkInternal
-  return LinkContent
+  return null
 }
 
 // Link Router. Decide if it's internal, external, or an action button.
 function Link(props) {
   const Component = getLinkElement(props)
+  if (!Component) return <LinkContent {...props} />
   // Do we want to send LinkContent to LinkInternal?
-  return (<Component {...props} />)
+  return (
+    <Component {...props}>
+      <LinkContent {...props} />
+    </Component>
+  )
 }
 Link.propTypes = {
   action: PropTypes.func,

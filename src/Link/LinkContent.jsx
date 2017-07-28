@@ -1,7 +1,7 @@
 import React, { createElement } from 'react'
 import PropTypes from 'prop-types'
 import { isObject, isString } from 'lodash'
-import Icon from './Icon'
+import Icon from '../Icon'
 
 function buildIconInfo(icon) {
   const defaultIcon = { symbol: 'link' }
