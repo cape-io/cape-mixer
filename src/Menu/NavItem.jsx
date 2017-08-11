@@ -11,11 +11,7 @@ const styles = {
 function NavItem({ className, isActive, id, ...props }) {
   return (
     <li className={classnames(id, className, { active: isActive })}>
-      <LinkEl
-        className="brown bg-darkgray-hover white-hover"
-        {...props}
-        style={styles.links}
-      />
+      <LinkEl style={styles.links} {...props} />
     </li>
   )
 }
