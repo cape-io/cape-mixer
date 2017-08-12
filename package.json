@@ -11,7 +11,7 @@
     "cape-redux-reducer": "^3.10.3",
     "cape-routes": "^1.1.1",
     "cape-select": "^2.4.0",
-    "cape-style": "^1.0.3",
+    "cape-style": "^1.1.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.8",

@@ -1515,9 +1515,9 @@ cape-select@^2.3.1, cape-select@^2.4.0:
     cape-lodash "^1.7.0"
     lodash "^4.17.2"
 
-cape-style@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/cape-style/-/cape-style-1.0.3.tgz#91cc1d838d0f838fece8b1beb192d7444f1a367d"
+cape-style@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/cape-style/-/cape-style-1.1.0.tgz#a2a330ce9dd9d7fe34e65183de0cc4ff211932fa"
   dependencies:
     cape-lodash "^1.11.0"
     lodash "^4.17.4"
