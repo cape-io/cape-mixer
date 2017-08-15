@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { flow, get, propertyOf } from 'lodash/fp'
+import { map } from 'lodash'
 import classnames from 'classnames'
-import map from 'lodash/map'
 import css from 'cape-style'
 import NavItem from './NavItem'
 
 function Menu({ activeId, className, links, actions, styles }) {
-  function getAction({ action }) { return actions[action] }
+  const getAction = flow(get('action'), propertyOf(actions))
   function isActive({ id }) { return activeId === id }
   return (
     <ul className={classnames(className, 'menu')} style={css('lsNone p0', styles.menu)}>
