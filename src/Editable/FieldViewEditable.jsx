@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import radium from 'radium'
+
 // The button that gets clicked for simple editable text fields.
 
 export const styles = {
@@ -49,6 +51,8 @@ function PreviewTextEditable({ className, emptyText, title, value, onClick, styl
 PreviewTextEditable.defaultProps = {
   className: 'btn btn-secret',
   title: 'Click to edit',
+  emptyText: 'Empty',
+  value: null,
 }
 PreviewTextEditable.propTypes = {
   className: PropTypes.string,
@@ -59,4 +63,4 @@ PreviewTextEditable.propTypes = {
   value: PropTypes.string,
 }
 
-export default PreviewTextEditable
+export default radium(PreviewTextEditable)

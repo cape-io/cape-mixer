@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import classnames from 'classnames'
 
-import { preventDefault } from '../utils'
+import { preventDefault } from './utils'
 
 // Editable formGroup wrapper.
 function FormGroup(props) {

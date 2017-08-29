@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connectField } from 'redux-field'
 
 import FormGroup from './FormGroup'
-import PreviewText from './PreviewText'
+import PreviewText from './FieldViewEl'
 import EditField from './EditField'
 
 // Using this for a typical horizontal editable field.

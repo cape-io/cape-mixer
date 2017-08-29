@@ -11,7 +11,7 @@ import Help from './Help'
 
 function EditField(props) {
   const {
-    buttons, fieldEvent, formEvent, className, id, form, onSubmit, preventClose, type, ...other,
+    buttons, fieldEvent, formEvent, className, id, form, onSubmit, preventClose, type, ...other
   } = props
   const { hasError, errorMessage, help, suggestion, value } = form
   const helpTxt = hasError ? errorMessage : help
