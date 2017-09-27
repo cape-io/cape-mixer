@@ -5,6 +5,8 @@ import FormGroup from './FormGroup'
 import PreviewText from './FieldViewEl'
 import EditField from './EditField'
 
+// DEPRICATED PROBABLY
+
 // Using this for a typical horizontal editable field.
 // Think of this as the field form container.
 function FieldWrapper(props) {
@@ -45,11 +47,15 @@ function FieldWrapper(props) {
 FieldWrapper.propTypes = {
   editable: PropTypes.bool.isRequired,
   emptyText: PropTypes.string,
-  fieldEvent: PropTypes.object.isRequired,
-  form: PropTypes.object.isRequired,
+  fieldEvent: PropTypes.shape({
+    open: PropTypes.func.isRequired,
+  }).isRequired,
+  form: PropTypes.shape({
+    value: PropTypes.any,
+  }).isRequired,
   formEvent: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
   open: PropTypes.bool,
   type: PropTypes.oneOf([
     'email',
@@ -63,6 +69,9 @@ FieldWrapper.propTypes = {
 }
 FieldWrapper.defaultProps = {
   editable: true,
+  emptyText: null,
+  open: false,
   type: 'text',
+  value: null,
 }
 export default connectField()(FieldWrapper)
