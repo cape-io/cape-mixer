@@ -1,6 +1,6 @@
 {
   "name": "cape-mixer",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "main": "lib/module.js",
   "dependencies": {
     "attr-accept": "^1.1.0",
