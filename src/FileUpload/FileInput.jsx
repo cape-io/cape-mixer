@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react'
-
+import React from 'react'
+import PropTypes from 'prop-types'
 // Should only provide drop functionality. Nothing more. Use Uploading component to show progress.
 
 function FileInput({ accept, message, onSelect, uploadStarted }) {

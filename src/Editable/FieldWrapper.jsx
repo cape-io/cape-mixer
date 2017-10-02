@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connectField } from 'redux-field'
 
 import FormGroup from './FormGroup'

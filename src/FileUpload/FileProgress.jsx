@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 function FileProgress({ savedProgress }) {
   const progressStr = `${savedProgress}%`
@@ -6,9 +7,12 @@ function FileProgress({ savedProgress }) {
   return (
     <div className="dz-progress progress">
       <div
-        className="progress-bar" role="progressbar"
+        className="progress-bar"
+        role="progressbar"
         style={{ backgroundColor: 'lightgreen', width: progressStr }}
-        aria-valuenow={savedProgress} aria-valuemin="0" aria-valuemax="100"
+        aria-valuenow={savedProgress}
+        aria-valuemin="0"
+        aria-valuemax="100"
       >
         {progressStr}
       </div>
