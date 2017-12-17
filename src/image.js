@@ -25,7 +25,7 @@ export const onFileComplete = (dispatch, entity, prefix) => (store) => {
 
   // dispatch(saved(prefix, { id, value: url }))
   loadImage(getImgPreviewSrc(url)(state))
-  .then(() => dispatch(clear(prefix)))
+    .then(() => dispatch(clear(prefix)))
   // console.log('done', getFileUrl(fileName))
 }
 
@@ -40,7 +40,7 @@ export const uploadImage = (dispatch, entity, file, props) => {
     return undefined
   })
   dispatch(uploadFile({ file, entity }))
-  .then(onFileComplete(dispatch, entity, props.prefix))
+    .then(onFileComplete(dispatch, entity, props.prefix))
   // @TODO Make sure there isn't already this file in the database.
 
   // Need to update the image form field?
@@ -121,11 +121,11 @@ export const errorOrBlur = next => props => (file) => {
 export const handleSelect = errorOrBlur((props, file) => {
   const { dispatch, prefix } = props
   loadSha(file)
-  .then(fileWithSha => dispatch(ensureFileEntity(props, fileWithSha)))
-  .then((entity) => {
-    if (!isUploaded(entity)) {
-      return uploadImage(dispatch, entity, file.file, props)
-    }
-    return dispatch(clear(prefix))
-  })
+    .then(fileWithSha => dispatch(ensureFileEntity(props, fileWithSha)))
+    .then((entity) => {
+      if (!isUploaded(entity)) {
+        return uploadImage(dispatch, entity, file.file, props)
+      }
+      return dispatch(clear(prefix))
+    })
 })

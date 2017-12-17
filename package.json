@@ -1,6 +1,6 @@
 {
   "name": "cape-mixer",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "main": "lib/module.js",
   "dependencies": {
     "attr-accept": "^1.1.0",
@@ -16,14 +16,14 @@
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
     "radium": "^0.19.4",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
-    "react-textarea-autosize": "^5.1.0",
+    "react-textarea-autosize": "^5.2.1",
     "redux": "^3.6.0",
     "redux-field": "^5.1.2",
     "redux-graph": "^2.12.1",
-    "redux-history-component": "^2.1.6",
+    "redux-history-component": "^2.2.0",
     "reselect": "^3.0.0",
     "simple-sha1": "^2.1.0",
     "tinycolor2": "^1.4.1"

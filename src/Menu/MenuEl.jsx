@@ -20,7 +20,10 @@ function Menu({ activeId, className, links, actions, styles }) {
 Menu.propTypes = {
   activeId: PropTypes.string,
   className: PropTypes.string,
-  links: PropTypes.arrayOf(PropTypes.object).isRequired,
+  links: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
   actions: PropTypes.objectOf(PropTypes.func).isRequired,
   styles: PropTypes.objectOf(PropTypes.object),
 }
